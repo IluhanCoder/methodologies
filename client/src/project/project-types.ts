@@ -14,12 +14,14 @@ export interface Rights {
 
 export interface Participant {
     participant: string,
-    rights: Rights
+    rights: Rights,
+    salary?: number
 }
 
 export interface ParticipantResponse {
     participant: UserResponse,
-    rights: Rights
+    rights: Rights,
+    salary: number
 }
 
 export interface ProjectCredentials {

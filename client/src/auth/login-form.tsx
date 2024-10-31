@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import FormComponent from "../forms/form-component";
 import { submitButtonStyle } from "../styles/button-syles";
 import { inputStyle, linkStyle } from "../styles/form-styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ErrorContainer from "../errors/error-container";
 import authService from "./auth-service";
 import { FormEvent, useState } from "react";
@@ -12,6 +12,8 @@ import errorStore from "../errors/error-store";
 import formStore from "../forms/form-store";
 
 function LoginForm () {
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState<LoginCredentials>({
         nickname: "",
         email: "",
@@ -45,19 +47,18 @@ function LoginForm () {
 
         if(result?.status === "success") { 
             formStore.dropForm();
+            navigate("/projects");
         }
     }
 
     return <FormComponent formLabel="Вхід в обліковий запис">
-        <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
+        <form className="flex flex-col p-4" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-2 py-2">
                 <div className="flex flex-col gap-2 px-10">
-                    <label className="font-bold text-gray-600 text-xs">Email або логін</label>
-                    <input className={inputStyle} type="text" onChange={handleChange} name="nickname"/>
+                    <input className={inputStyle} placeholder="Email або логін" type="text" onChange={handleChange} name="nickname"/>
                 </div>
                 <div className="flex flex-col gap-2 px-10">
-                    <label className="font-bold text-gray-600 text-xs">Пароль</label>
-                    <input className={inputStyle} type="password" onChange={handleChange} name="password"/>
+                    <input className={inputStyle} placeholder="пароль" type="password" onChange={handleChange} name="password"/>
                 </div>
             </div>
             <div className="flex justify-center">
@@ -68,7 +69,7 @@ function LoginForm () {
                     <p>Якщо у вас нема облікового запису, ви можете <Link to="/registration" className={linkStyle}>зареєструватися</Link></p>
                 </div>
                 <div>
-                    <button type="submit" className={submitButtonStyle}>Увійти</button>
+                    <button type="submit" className={submitButtonStyle + " text-sm"}>Увійти</button>
                 </div>
             </div>
         </form>

@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
-import { submitButtonStyle } from "../styles/button-syles";
-import { inputStyle } from "../styles/form-styles";
+import { largeSubmitButtonStyle, submitButtonStyle } from "../styles/button-syles";
+import { inputStyle, linkStyle } from "../styles/form-styles";
 import RegCredantials from "./auth-types";
 import { ChangeEvent } from "react";
 import authService from "./auth-service";
@@ -8,6 +8,9 @@ import ErrorContainer from "../errors/error-container";
 import { observer } from "mobx-react";
 import errorStore from "../errors/error-store";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import formStore from "../forms/form-store";
+import LoginForm from "./login-form";
 
 function RegistationPage() {
     const navigate = useNavigate();
@@ -51,49 +54,50 @@ function RegistationPage() {
         }
     }
 
-    return <div className="flex flex-col p-4">
+    return <div className="flex flex-col p-10">
         <div className="flex justify-center">
             <div className="flex justify-center px-12 w-2/3">
                 <div className="flex flex-col w-full">
-                    <div className="flex justify-center">
-                        <h1 className="text-2xl">Реєстрація</h1>
+                    <div className="flex flex-col gap-2 py-6">
+                        <div className="flex justify-center">
+                            <h1 className="text-3xl">Вітаємо в Methodologist 🤗</h1>
+                        </div>
+                        <div className="flex justify-center text-stone-600">
+                            <p>Просимо ввести інформацію про Вас, щоб Ви могли продовжити роботу із системою</p>
+                        </div>
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className="grid grid-cols-2 p-4 gap-x-10 gap-y-4">
                             <div className="flex flex-col gap-1">
-                                <label className="font-bold text-gray-600 text-xs">Ім'я</label>
-                                <input className={inputStyle} type="text" name="name" onChange={handleChange}/>
+                                <input className={inputStyle} placeholder="імʼя" type="text" name="name" onChange={handleChange}/>
+                            </div>
+                            <div className="flex flex-col gap-1 col-span-1">
+                                <input className={inputStyle} placeholder="псевдонім користувача (логін)" type="text" onChange={handleChange} name="nickname"/>
                             </div>
                             <div className="flex flex-col gap-1">
-                                <label className="font-bold text-gray-600 text-xs">Прізвище</label>
-                                <input className={inputStyle} type="text" onChange={handleChange} name="surname"/>
+                                <input className={inputStyle} placeholder="прізвище" type="text" onChange={handleChange} name="surname"/>
+                            </div>
+                            <div className="flex flex-col gap-1 col-span-1">
+                                <input className={inputStyle}  placeholder="email" type="email" onChange={handleChange} name="email"/>
                             </div>
                             <div className="flex flex-col gap-1 col-span-2">
-                                <label className="font-bold text-gray-600 text-xs">Логін користувача</label>
-                                <input className={inputStyle} type="text" onChange={handleChange} name="nickname"/>
-                            </div>
-                            <div className="flex flex-col gap-1 col-span-2">
-                                <label className="font-bold text-gray-600 text-xs">Електрона поштa</label>
-                                <input className={inputStyle} type="email" onChange={handleChange} name="email"/>
-                            </div>
-                            <div className="flex flex-col gap-1 col-span-2">
-                                <label className="font-bold text-gray-600 text-xs">Назва організації</label>
-                                <input className={inputStyle} type="text" onChange={handleChange} name="organisation"/>
+                                <input className={inputStyle} placeholder="назва організації, в якій ви працюєте" type="text" onChange={handleChange} name="organisation"/>
                             </div>
                             <div className="flex flex-col gap-1">
-                                <label className="font-bold text-gray-600 text-xs">Пароль</label>
-                                <input className={inputStyle} type="password" onChange={handleChange} name="password"/>
+                                <input className={inputStyle} placeholder="пароль" type="password" onChange={handleChange} name="password"/>
                             </div>
                             <div className="flex flex-col gap-1">
-                                <label className="font-bold text-gray-600 text-xs">Підтвердження паролю</label>
-                                <input className={inputStyle} type="password" onChange={handleChange} name="pswSubmit"/>
+                                <input className={inputStyle}  placeholder="підтвердження пароля" type="password" onChange={handleChange} name="pswSubmit"/>
                             </div>
                         </div>
                         <div className="flex justify-center">
                             <ErrorContainer/>
                         </div>
                         <div className="flex justify-center pt-4">
-                            <button type="submit" className={submitButtonStyle} onClick={handleSubmit}>Зареєструватися</button>
+                            <button type="submit" className={largeSubmitButtonStyle} onClick={handleSubmit}>Зареєструватися</button>
+                        </div>
+                        <div className="flex justify-center pt-6">
+                            <button type="button" onClick={() => formStore.setForm(<LoginForm/>)} className={linkStyle}>Я вже маю обліковий запис</button>
                         </div>
                     </form>
                 </div>

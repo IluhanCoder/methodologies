@@ -18,8 +18,9 @@ const PriceWindow = ({projectId}: LocalParams) => {
         getPrice()
     }, []);
 
-    if(price !== undefined) return <div>
-        {price}
+    if(price !== undefined) return <div className="flex w-full justify-center gap-2 text-xl p-3 text-stone-700">
+        <div>Вартість проєкту:</div>
+        <div>{price} $</div>
     </div>
     else return <LoadingScreen/>
 }

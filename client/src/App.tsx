@@ -27,7 +27,7 @@ function App() {
       <BrowserRouter>
         <FormCloserProvider>
           <Header/>
-          <div className='grow'>
+          <div className='grow overflow-auto'>
             <Routes>
               {CustomRoutes.map(route => route)}
             </Routes>

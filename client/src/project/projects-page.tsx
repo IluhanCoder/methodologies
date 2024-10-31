@@ -38,16 +38,15 @@ function ProjectsPage () {
     useEffect(() => {fetchProjects()}, [user]);
     useEffect(() => {filterProject()}, [filter]);
 
-    if(projects) return <div className="bg-gray-100 flex flex-col gap-4 p-4 h-full">
-        <div className=" px-6 font-bold text-xl text-gray-700 text-center">
-            Проекти
+    if(projects) return <div className="bg-gray-50 flex flex-col h-full gap-4 p-4">
+        <div className="font-thin px-6 pt-4 text-6xl text-center">
+            Ваші проекти
         </div>
-        <div className="flex justify-center gap-2">
-            <label className="mt-1">Пошук: </label>
-            <input type="text" className={inputStyle + " w-96"} value={filter} onChange={(e: any) => setFilter(e.target.value)}/>
+        <div className="flex justify-end gap-2">
+            <input type="text" placeholder="🔍  пошук" className={inputStyle + " py-1 w-80"} value={filter} onChange={(e: any) => setFilter(e.target.value)}/>
         </div>
         {projects.length > 0 && <div className="grow overflow-auto">
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-3 gap-4">
             {filteredProjects.map((project: ProjectResponse) => {
                 return <ProjectCard project={project}/>
             })}</div></div> || <div className="grow text-center pt-48 text-2xl font-bold text-gray-600">проекти відсутні</div>}

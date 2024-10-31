@@ -196,7 +196,8 @@ const fullLookUp = [
                 0
               ]
             },
-            rights: '$$participant.rights'
+            rights: '$$participant.rights',
+            salary: '$$participant.salary'
           }
         }
       },
