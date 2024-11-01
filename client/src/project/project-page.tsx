@@ -225,13 +225,13 @@ function ProjectPage () {
                 </div>
             </div>
 
-                <div className="flex flex-col grow">
+                <div className="flex flex-col grow pr-4">
                     <div className="flex justify-center p-4">
-                            <div className="grow font-thin text-center text-4xl">{project?.name}</div>
-                            {project?.owner._id !== userStore.user?._id &&  
-                            <button type="button" className={redButtonSyle + " text-xs mt-1"} onClick={handleLeave}>
-                                покинути проект
-                            </button>}
+                        <div className="grow font-thin text-center text-4xl">{project?.name}</div>
+                        {project?.owner._id !== userStore.user?._id &&  
+                        <button type="button" className={redButtonSyle + " text-xs mt-1"} onClick={handleLeave}>
+                            покинути проект
+                        </button>}
                     </div>
                     
                     {rights && project.type === "scrum" && <div className="flex flex-col grow px-6 py-2">

@@ -21,8 +21,8 @@ export default new class AnalyticsController {
 
     async taskRatio(req: Request, res: Response) {
         try {
-            const {projectId, startDate, endDate, daily, userId} = req.body;
-            const result = await analyticsService.taskRatio(projectId, new Date(startDate), new Date(endDate), daily, userId);
+            const {projectId, startDate, endDate, daily, userId, phaseId} = req.body;
+            const result = await analyticsService.taskRatio(projectId, new Date(startDate), new Date(endDate), daily, userId, phaseId);
             res.status(200).json({
                 status: "success",
                 result

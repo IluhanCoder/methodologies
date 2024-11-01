@@ -448,7 +448,8 @@ export default new class AnalyticsService {
       projectId: string,
       startDate: Date,
       endDate: Date,
-      userId: string | null = null
+      userId: string | null = null,
+      phaseId?: string
     ): Promise<Task[]> {
       const convertedProjectId = new mongoose.Types.ObjectId(projectId);
   
@@ -456,14 +457,16 @@ export default new class AnalyticsService {
         projectId: convertedProjectId,
         created: { $gte: startDate, $lte: endDate },
       });
-  
+      
       const backlogs = await backlogModel.find({ projectId: convertedProjectId });
       const backlogTasks: Task[] = await this.getTasksFromBacklogs(backlogs, startDate, endDate);
   
       const phases = await phaseModel.find({ projectId: convertedProjectId });
-      const phaseTasks: Task[] = await this.getTasksFromPhases(phases, startDate, endDate);
-  
-      const allTasks: Task[] = [...projectTasks, ...backlogTasks, ...phaseTasks];
+      const phaseTasks: Task[] = (phaseId) ? await TaskModel.find({phaseId: new mongoose.Types.ObjectId(phaseId)}) : await this.getTasksFromPhases(phases, startDate, endDate);
+
+      let allTasks: Task[];
+      if(phaseId === undefined) allTasks = [...projectTasks, ...backlogTasks, ...phaseTasks];
+      else allTasks = [...phaseTasks];
   
       return userId
         ? allTasks.filter(task =>
@@ -585,13 +588,14 @@ export default new class AnalyticsService {
         startDate: Date,
         endDate: Date,
         isDaily: boolean,
-        userId: string | null = null
+        userId: string | null = null,
+        phaseId?: string
       ): Promise<Statistic[]> {
-        const tasks: Task[] = await this.getFilteredTasks(projectId, startDate, endDate, userId);
-      
+        const tasks: Task[] = await this.getFilteredTasks(projectId, startDate, endDate, userId, phaseId);
+
         // Generate statistics for task counts by month or day
         const stats = this.generateStatistics(tasks, startDate, endDate, isDaily, task => task.created);
-      
+
         // Accumulate task status ratios (done vs total)
         return this.calculateCumulativeRatios(stats, tasks);
       }

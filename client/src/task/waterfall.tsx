@@ -39,15 +39,15 @@ const Waterfall = ({project, rights}: LocalParams) => {
     }, [isMyPhases]);
 
     if(phases) return <div>
-        <div>
+        <div className="flex gap-2 justify-center">
             <input type="checkbox" checked={isMyPhases} onChange={(event) => setIsMyPhases(!isMyPhases)}/>
             <label>Тільки етапи, за які відповідальні ви</label>
         </div>
-        <div>
+        <div className="max-h-[1000px] overflow-auto">
             <PhasesMapper projectId={project._id} callBack={getPhases} phases={phases} rights={rights}/>
         </div>
-        <div>
-            <button type="button" className={submitButtonStyle} onClick={HandleNewPhase}>
+        <div className="flex justify-center">
+            <button type="button" className={submitButtonStyle + " text-2xl"} onClick={HandleNewPhase}>
                 додати етап
             </button>
         </div>

@@ -18,16 +18,18 @@ registerLocale("ua", uk);
 interface LocalParams {
   name: string;
   data: any[];
+  width?: number,
+  height?: number
 }
 
 const AnalyticsGraph = (params: LocalParams) => {
-  const { data, name } = params;
+  const { data, name, width, height } = params;
 
   return (
     <>
       <LineChart
-        width={1000}
-        height={300}
+        width={width ?? 1000}
+        height={height ?? 300}
         data={[{ name, data }]}
         margin={{
           top: 5,

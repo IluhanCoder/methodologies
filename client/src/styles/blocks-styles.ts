@@ -1,1 +1,1 @@
-export const BlockStyle = "";
+export const BlockStyle = "bg-white rounded p-4";

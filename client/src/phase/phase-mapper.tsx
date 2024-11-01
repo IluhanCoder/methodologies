@@ -4,6 +4,7 @@ import PhaseCard from "./phase-card";
 import phaseService from "./phase-service";
 import Phase from "./phase-type";
 import LoadingScreen from "../misc/loading-screen";
+import { BlockStyle } from "../styles/blocks-styles";
 
 interface LocalParams {
     phases: Phase[],
@@ -24,7 +25,7 @@ const PhasesMapper = ({phases, rights, callBack, projectId}: LocalParams) => {
         getActiveIndex();
     }, [phases]);
 
-    if(activeIndex !== undefined) return <div>
+    if(activeIndex !== undefined) return <div className="flex p-2 flex-col gap-4">
         {phases.map((phase: Phase, index: number) => <PhaseCard isActive={index == activeIndex || index == activeIndex - 1} callBack={callBack} rights={rights} phase={phase}/>)}
     </div>
     else return <LoadingScreen/>
