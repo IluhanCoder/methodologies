@@ -5,6 +5,7 @@ import DatePicker from "../analytics/date-picker";
 import phaseService from "./phase-service";
 import { submitButtonStyle } from "../styles/button-syles";
 import formStore from "../forms/form-store";
+import { inputStyle } from "../styles/form-styles";
 
 interface LocalParams {
     projectId: string,
@@ -54,23 +55,25 @@ const NewPhaseForm = ({projectId, callBack, newPhaseHandler}: LocalParams) => {
     }
 
     return <FormComponent formLabel="новий етап">
-        <div>
-            <label>назва</label>
-            <input type="text" name="name" onChange={handleChange}/>
+        <div className="flex flex-col gap-2 p-2">
+            <div className="flex gap-1 justify-center">
+                <input placeholder="назва" className={inputStyle} type="text" name="name" onChange={handleChange}/>
+            </div>
+            <div className="flex gap-1 justify-center">
+                <input placeholder="мета" className={inputStyle} type="text" name="goal" onChange={handleChange}/>
+            </div>
         </div>
-        <div>
-            <label>мета</label>
-            <input type="text" name="goal" onChange={handleChange}/>
-        </div>
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2 p-2">
                 <div className="flex justify-center">Терміни:</div>
                 <div className="flex justify-center">
                     <DatePicker className="flex flex-col gap-2" handleStart={handleStart} handleEnd={handleEnd} startDate={formData.startDate} endDate={formData.endDate}/>
                 </div>
             </div>
-        <button type="button" className={submitButtonStyle} onClick={() => newPhaseHandler(formData)}>
-            створити
-        </button>
+        <div className="flex justify-center">
+            <button type="button" className={submitButtonStyle} onClick={() => newPhaseHandler(formData)}>
+                створити
+            </button>
+        </div>
     </FormComponent>
 }
 

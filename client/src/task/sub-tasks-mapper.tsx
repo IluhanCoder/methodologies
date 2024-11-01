@@ -34,21 +34,24 @@ const SubTasksMapper = ({taskId, callBack, disableCheckboxes, rights}: LocalPara
 
     useEffect(() => { getSubTasks() }, [callBack]);
 
-    if(subTasks) return <div>
+    if(subTasks) return <div className="flex w-full justify-center">
+        <div className="flex flex-col gap-2">
         {subTasks.map((subTask: SubTask) => {
-            return <div>
-                <div>
-                    <input disabled={disableCheckboxes} checked={subTask.isChecked} type="checkbox" onChange={() => handleCheckSubTask(subTask._id)}/>
-                </div>
-                <div>{subTask.name}</div>
-                {rights.delete && <div>
-                    <button type="button" onClick={() => {handleSubtaskDelete(subTask._id)}} className={redButtonSyle}>X</button>
-                </div>}
+            return <div className="flex justify-between gap-20">
+                <div className="flex gap-2">
+                    <div>
+                        <input disabled={disableCheckboxes} checked={subTask.isChecked} type="checkbox" onChange={() => handleCheckSubTask(subTask._id)}/>
+                    </div>
+                    <div>{subTask.name}</div>
+                    </div>
+                    {rights.delete && <div>
+                        <button type="button" onClick={() => {handleSubtaskDelete(subTask._id)}} className="text-xs text-red-600">видалити</button>
+                    </div>}
             </div>
         })}
+        </div>
     </div>
-    else if(subTasks === null) return <></>
-    else return <LoadingScreen/>
+    else return <></>
 }
 
 export default SubTasksMapper;

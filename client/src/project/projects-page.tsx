@@ -49,7 +49,7 @@ function ProjectsPage () {
             <div className="grid grid-cols-3 gap-4">
             {filteredProjects.map((project: ProjectResponse) => {
                 return <ProjectCard project={project}/>
-            })}</div></div> || <div className="grow text-center pt-48 text-2xl font-bold text-gray-600">проекти відсутні</div>}
+            })}</div></div> || <div className="grow text-center pt-48 text-2xl font-bold text-gray-600">проєкти відсутні</div>}
         <div className="flex justify-center">
             <button type="button" className={submitButtonStyle} onClick={handleNewProject}>створити новий проект</button>
         </div>

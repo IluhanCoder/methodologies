@@ -30,14 +30,14 @@ function ProjectCard({project}: LocalParams) {
                     <label className="font-light text-gray-700"><DateFormater value={project.created} dayOfWeek/></label>
                 </div>
                 <div className="flex flex-start gap-1">
-                    <label>Власник проекту: </label>
+                    <label>Власник проєкту: </label>
                     <label>
                         <Link className={linkStyle} to={`/profile/${project.owner._id}`}>{project.owner.nickname}</Link>
                     </label>
                 </div>
             </div>
             <div className="flex flex-col gap-2 text-gray-600 text-xs">
-                <label className="flex flex-start">Учасники проекту:</label>
+                <label className="flex flex-start">Учасники проєкту:</label>
                 <div className="flex flex-start">
                     <ParticipantsWindow participants={project.participants} maxDisplay={10}/>
                 </div>

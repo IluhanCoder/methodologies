@@ -7,6 +7,6 @@ export default class ProjectError extends Error {
     }
 
     static ProjectNotFound() {
-        return new ProjectError("Проект не було знайдено", 400);
+        return new ProjectError("Проєкт не було знайдено", 400);
     }
 }

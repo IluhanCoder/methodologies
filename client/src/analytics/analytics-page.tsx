@@ -68,7 +68,7 @@ function AnalyticsPage () {
 
     return <div className="flex flex-col p-4 gap-2">
         <div className="py-2">
-            <Link to={`/project/${projectId}`} className={lightButtonStyle}>Назад до проекту</Link>
+            <Link to={`/project/${projectId}`} className={lightButtonStyle}>Назад до проєкту</Link>
         </div>
         <div className="flex justify-center">
             <div className="flex flex-col gap-1">

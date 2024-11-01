@@ -95,15 +95,15 @@ function NewProjectForm({callBack}: LocalParams) {
     return <FormComponent formLabel="Новий проект">
         <form onSubmit={handleSubmit} className="flex flex-col gap-2 px-10">
             <div className="flex flex-col gap-1">
-                <label className="font-bold text-gray-600 text-xs">назва проекту:</label>
+                <label className="font-bold text-gray-600 text-xs">назва проєкту:</label>
                 <input className={inputStyle} name="name" type="text" onChange={handleChange}/>
             </div>
             <div>
-                <label>Початок і кінець проекту</label>
+                <label>Початок і кінець проєкту</label>
                 <DatePicker startDate={formData.startDate} endDate={formData.endDate} handleStart={handleStart} handleEnd={handleEnd}/>
             </div>
             <div>
-                <label>Тип проекту:</label>
+                <label>Тип проєкту:</label>
                 <select name="type" onChange={handleChange}>
                     <option value="auto">визначити автоматично</option>
                     { typeOptions.map((option: string) => <option value={option}>{option}</option>)}

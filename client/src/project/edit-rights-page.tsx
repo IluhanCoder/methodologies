@@ -38,7 +38,7 @@ function EditRightsPage () {
 
     return <div className="p-2 flex flex-col">
         <div className="flex">
-            <Link to={`/project/${projectId}`} className={lightButtonStyle}>Назад до проекту</Link>
+            <Link to={`/project/${projectId}`} className={lightButtonStyle}>Назад до проєкту</Link>
         </div>
         <div className="py-4">
         <table className="w-full">
@@ -50,7 +50,7 @@ function EditRightsPage () {
                 <th>видаляти задачі</th>
                 <th>редагувати задачі</th>
                 <th>видаляти учасників</th>
-                <th>змінювати інформацію про проект</th>
+                <th>змінювати інформацію про проєкт</th>
             </tr>
             {rights.map((right: ParticipantResponse, index: number) => 
                 <tr className="border">

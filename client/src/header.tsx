@@ -35,7 +35,7 @@ function Header() {
                 Methologist
             </div>
             {userStore.user && <div className="mt-1 flex text-gray-600 gap-3">
-                <Link to="/projects">Проекти</Link>
+                <Link to="/projects">Проєкти</Link>
                 <Link to="/profile">Профіль</Link>
             </div>}
         </div>

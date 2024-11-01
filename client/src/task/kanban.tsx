@@ -10,10 +10,11 @@ import { VscTriangleLeft, VscTriangleRight } from "react-icons/vsc";
 import formStore from "../forms/form-store";
 import TaskInfoForm from "./task-info-form";
 import { Link } from "react-router-dom";
-import { lightButtonStyle } from "../styles/button-syles";
+import { lightButtonStyle, submitButtonStyle } from "../styles/button-syles";
 import LoadingScreen from "../misc/loading-screen";
 import { observer } from "mobx-react";
 import KanBanTaskCard from "./kanban-task-card";
+import NewTaskForm from "./new-task-form";
 
 interface LocalParams {
     project: ProjectResponse,
@@ -42,7 +43,15 @@ function KanBan({ project, rights, callBack }: LocalParams) {
         }
     }
 
+    const handleNewTask = () => {
+        formStore.setForm(<NewTaskForm projectId={project?._id} callBack={callBack}/>)
+    }
+
     if(project.tasks) return <div className="flex flex-col gap-3 p-4">
+        <div className="flex gap-2 justify-center pr-4">
+            <input type="checkbox" checked={isFiltered} onChange={() => setIsFiltered(!isFiltered)}/>
+            <label>тільки задачі, назначені вам</label>
+        </div>
         <div className="w-full grid grid-cols-3 gap-4">
             <div className="bg-gray-100 rounded p-4 flex flex-col gap-2">
                 <div className="text-gray-600 font-bold">Треба виконати:</div>
@@ -66,9 +75,8 @@ function KanBan({ project, rights, callBack }: LocalParams) {
                 })}
             </div>
         </div>
-        <div className="flex gap-2 justify-end pr-4">
-            <input type="checkbox" checked={isFiltered} onChange={() => setIsFiltered(!isFiltered)}/>
-            <label>тільки задачі, назначені вам</label>
+        <div className="flex justify-center">
+            <button type="button" className={submitButtonStyle} onClick={handleNewTask}>додати задачу</button>
         </div>
     </div>
     else return <LoadingScreen/>

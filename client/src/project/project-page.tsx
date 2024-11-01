@@ -94,10 +94,6 @@ function ProjectPage () {
         }
     }
 
-    const handleNewTask = () => {
-        formStore.setForm(<NewTaskForm projectId={project?._id} callBack={getProjectData}/>)
-    }
-
     useEffect(() => {
         getProjectData();
     }, [projectId])
@@ -106,7 +102,7 @@ function ProjectPage () {
         getUserRights();
     }, [project]);
 
-    if(project) return <div className="flex w-full bg-stone-100">
+    return <div className="flex w-full bg-stone-100 h-full">
         {project && <div className="flex w-full ">
             <div className="p-2">
                 <div className="p-2 flex flex-col gap-2 bg-white rounded shadow">
@@ -135,7 +131,7 @@ function ProjectPage () {
                     <div className="border rounded border-gray-200"></div>
                     <div className="flex flex-col">
                         <div className="text-center text-gray-600 pt-2">
-                            Власник проекту:
+                            Власник проєкту:
                         </div>
                         <div className="flex flex-col px-6 py-2 justify-center">
                             <div className="flex gap-4 justify-center">
@@ -230,7 +226,7 @@ function ProjectPage () {
                         <div className="grow font-thin text-center text-4xl">{project?.name}</div>
                         {project?.owner._id !== userStore.user?._id &&  
                         <button type="button" className={redButtonSyle + " text-xs mt-1"} onClick={handleLeave}>
-                            покинути проект
+                            покинути проєкт
                         </button>}
                     </div>
                     
@@ -245,11 +241,12 @@ function ProjectPage () {
                     {rights && project.type === "waterfall" && <div>
                         <Waterfall rights={rights} project={project}/>
                     </div>}
+                    <div className="flex justify-center">
+                </div>  
                 </div>
         </div>}
         
     </div>
-    else return <LoadingScreen/>
 }
 
 export default observer(ProjectPage);

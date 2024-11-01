@@ -51,7 +51,7 @@ function NewOwnerForm({project, callBack}: LocalParams) {
             </div>
         </div>
         <div>
-            <button onClick={handleInvite} className={submitButtonStyle} type="button">{`Передати проект користувачу`}</button>
+            <button onClick={handleInvite} className={submitButtonStyle} type="button">{`Передати проєкт користувачу`}</button>
         </div>
     </FormComponent>
 }

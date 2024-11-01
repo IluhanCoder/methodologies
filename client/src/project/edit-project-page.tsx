@@ -8,6 +8,7 @@ import { redButtonSyle, submitButtonStyle } from "../styles/button-syles";
 import userStore from "../user/user-store";
 import NewOwnerForm from "./new-owner-form";
 import formStore from "../forms/form-store";
+import { inputStyle } from "../styles/form-styles";
 
 const EditProjectPage = () => {
     const navigate = useNavigate();
@@ -99,28 +100,35 @@ const EditProjectPage = () => {
         getUserRights();
     }, [projectData])
 
-    if(formData) return <div>
-        <div>
-            <label>назва проекту:</label>
-            <input type="text" name="name" value={formData.name} onChange={handleChange}/>
+    if(formData) return <div className="flex justify-center mt-4"><div className="flex flex-col gap-4 py-4 text-xl px-20">
+        <div className="flex gap-2">
+            <label className="mt-1">назва проєкту:</label>
+            <input className={inputStyle} type="text" name="name" value={formData.name} onChange={handleChange}/>
         </div>
-        <div>
-            <label>днів на тиждень:</label>
-            <input type="number" name="daysPerWeek" value={formData.daysPerWeek} onChange={handleChange}/>
+        <div className="flex gap-2">
+            <label className="mt-1">днів на тиждень:</label>
+            <input className={inputStyle} type="number" name="daysPerWeek" value={formData.daysPerWeek} onChange={handleChange}/>
         </div>
-        <div>
-            <label>годин на добу:</label>
-            <input type="number" name="hoursPerDay" value={formData.hoursPerDay} onChange={handleChange}/>
+        <div className="flex gap-2">
+            <label className="mt-1">годин на добу:</label>
+            <input className={inputStyle} type="number" name="hoursPerDay" value={formData.hoursPerDay} onChange={handleChange}/>
         </div>
-        <DatePicker startDate={formData.startDate} endDate={formData.endDate} handleStart={handleStart} handleEnd={handleEnd}/>
-        {rights?.editProjectData && <button type="button" className={redButtonSyle + " text-xs mt-1"} onClick={handleProjectDelete}>
-            видалити проєкт
-        </button>}
-        {projectData?.owner._id === userStore.user?._id && <div>
-                            <button className={redButtonSyle + " text-xs mt-1"} type="button" onClick={handleChangeOwner}>змінити власника проекту</button>
-                        </div>}
-        <button className={submitButtonStyle} onClick={handleSubmit}>підтвердити зміни</button>
-    </div>
+        <div className="flex justify-center">
+            <div className="flex flex-col gap-2">
+                <div>Терміни проєкту:</div>
+                <DatePicker className="flex flex-col gap-2" startDate={formData.startDate} endDate={formData.endDate} handleStart={handleStart} handleEnd={handleEnd}/>
+            </div>
+        </div>
+        <div className="flex flex-col gap-2">
+                {rights?.editProjectData && <div className="flex justify-center"><button type="button" className={redButtonSyle + " text-xs mt-1"} onClick={handleProjectDelete}>
+                видалити проєкт
+                </button></div>}
+            {projectData?.owner._id === userStore.user?._id && <div className="flex justify-center">
+                                <button className={redButtonSyle + " text-xs mt-1"} type="button" onClick={handleChangeOwner}>змінити власника проекту</button>
+                            </div>}
+            <div className="flex justify-center mt-4"><button className={submitButtonStyle} onClick={handleSubmit}>підтвердити зміни</button></div>
+        </div>
+    </div></div>
     else return <LoadingScreen/>
 }
 
