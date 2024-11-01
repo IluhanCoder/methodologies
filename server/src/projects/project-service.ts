@@ -571,7 +571,7 @@ export default new class ProjectService {
       const convertedProjectId = new mongoose.Types.ObjectId(projectId);
     
       // Fetch the project along with participants and new fields
-      const project = await ProjectModel.findById(projectId).lean() as Project;
+      const project = await ProjectModel.findById(projectId).lean() as any;
       const { participants, daysPerWeek, hoursPerDay, startDate: projectStartDate, endDate: projectEndDate } = project;
     
       // Helper function to fetch all project tasks
@@ -629,7 +629,7 @@ export default new class ProjectService {
     
         for (const executorId of task.executors) {
           const participant: Participant | undefined = participants.find(
-            (p) => p.participant.equals(executorId)
+            (p) => (p.participant as mongoose.Types.ObjectId).equals(executorId)
           );
     
           if (participant?.salary) {
