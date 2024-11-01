@@ -9,7 +9,7 @@ import authController from './auth/auth-controller';
 config();
 
 const app = express();
-const port = 5001;
+const port = process.env.PORT;
 
 const conn = process.env.DB_CONN;
 const clientUrl = process.env.CLIENT_URL;
